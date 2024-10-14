@@ -1,4 +1,4 @@
-<!-- hero.php -->
+<!-- components/hero.php -->
 <section id="hero">
     <img src="images/tischtennis-hero.jpg" alt="Tischtennisspiel in Aktion">
     <div class="hero-text">
