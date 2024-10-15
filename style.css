@@ -1,109 +1,48 @@
-/* Allgemeine Einstellungen */
 body {
-    margin: 0;
     font-family: Arial, sans-serif;
-  }
-  
-  /* Navigation */
-  nav {
-    background-color: #2C3E50;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem;
-  }
-  
-  nav .logo img {
-    height: 50px;
-  }
-  
-  nav ul {
-    list-style: none;
-    display: flex;
-  }
-  
-  nav ul li {
-    margin-right: 20px;
-  }
-  
-  nav ul li a {
-    color: #FFF;
-    text-decoration: none;
-    font-size: 18px;
-  }
-  
-  /* Hero Image */
-  .hero {
-    position: relative;
-    text-align: center;
-  }
-  
-  .hero img {
-    width: 100%;
-    height: auto;
-  }
-  
-  .hero h1 {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background: #007bff;
     color: white;
-    font-size: 36px;
-    text-shadow: 2px 2px 4px #000;
-  }
-  
-  /* Turnier- und Archiv-Bereiche */
-  .tournaments, .archive {
-    padding: 2rem;
-    background-color: #ecf0f1;
-    margin: 1rem 0;
-  }
-  
-  .tournaments h2, .archive h2 {
-    color: #2C3E50;
-  }
-  
-  .tournaments ul, .archive ul {
+    padding: 10px 20px;
+    text-align: center;
+}
+
+nav ul {
     list-style: none;
     padding: 0;
-  }
-  
-  .tournaments ul li, .archive ul li {
+}
+
+nav ul li {
+    display: inline;
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+main {
+    padding: 20px;
+}
+
+footer {
+    background: #f8f9fa;
+    text-align: center;
+    padding: 10px 0;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+
+.alert {
     padding: 10px;
-    background-color: #fff;
-    margin: 5px 0;
-    border: 1px solid #ccc;
-  }
-  
-  /* Login Bereich */
-  .login {
-    padding: 2rem;
-    background-color: #f9f9f9;
-  }
-  
-  .login form {
-    display: flex;
-    flex-direction: column;
-    max-width: 400px;
-    margin: 0 auto;
-  }
-  
-  .login label {
-    margin-bottom: 5px;
-  }
-  
-  .login input {
-    margin-bottom: 15px;
-    padding: 10px;
-    font-size: 16px;
-  }
-  
-  .login button {
-    padding: 10px;
-    background-color: #2C3E50;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-  }
-  
+    background-color: #d4edda;
+    color: #155724;
+    margin: 20px 0;
+}
+

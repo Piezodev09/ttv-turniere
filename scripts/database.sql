@@ -16,17 +16,13 @@ CREATE TABLE IF NOT EXISTS tournament_players (
 CREATE TABLE IF NOT EXISTS matches (
     id INT AUTO_INCREMENT PRIMARY KEY,
     tournament_id INT NOT NULL,
-    round INT NOT NULL,
-    player1 INT,
-    player2 INT,
-    winner INT,
-    FOREIGN KEY (tournament_id) REFERENCES tournaments(id),
-    FOREIGN KEY (player1) REFERENCES players(id),
-    FOREIGN KEY (player2) REFERENCES players(id),
-    FOREIGN KEY (winner) REFERENCES players(id)
-    ALTER TABLE matches ADD COLUMN loser INT;
-
+    player1 VARCHAR(255) NOT NULL,
+    player2 VARCHAR(255) NOT NULL,
+    result1 INT DEFAULT 0,
+    result2 INT DEFAULT 0,
+    FOREIGN KEY (tournament_id) REFERENCES tournaments(id)
 );
+
 
 CREATE TABLE IF NOT EXISTS groups (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -34,3 +30,12 @@ CREATE TABLE IF NOT EXISTS groups (
     group_number INT NOT NULL,
     FOREIGN KEY (tournament_id) REFERENCES tournaments(id)
 );
+
+CREATE TABLE IF NOT EXISTS users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL
+    ALTER TABLE users ADD role VARCHAR(20) DEFAULT 'viewer';
+
+);
+

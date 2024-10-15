@@ -1,77 +1,66 @@
 <?php
 session_start();
 require '../scripts/db_connection.php';
+
+if (!isset($_SESSION['user_id'])) {
+    header('Location: login.php');
+    exit;
+}
+
+// Benutzerdaten abrufen
+$user_id = $_SESSION['user_id'];
+$stmt = $pdo->prepare("SELECT * FROM users WHERE id = ?");
+$stmt->execute([$user_id]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
 ?>
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Turnier-Dashboard</title>
-  <link rel="stylesheet" href="../style.css">
+    <meta charset="UTF-8">
+    <title>Dashboard - Turnierverwaltung</title>
+    <link rel="stylesheet" href="../style.css">
 </head>
 <body>
-  <h1>Willkommen im Turnier-Dashboard</h1>
-  <p>Hier kannst du Turniere verwalten und neue erstellen.</p>
+    <header>
+        <h1>Willkommen, <?php echo htmlspecialchars($user['username']); ?>!</h1>
+        <nav>
+            <ul>
+                <li><a href="create_tournament.php">Turnier erstellen</a></li>
+                <li><a href="live_results.php">Live Ergebnisse</a></li>
+                <li><a href="statistics.php">Statistiken</a></li>
+                <li><a href="cinema_mode.php">Kinomodus</a></li>
+                <li><a href="manage_users.php">Benutzer verwalten</a></li>
+                <li><a href="../scripts/logout.php">Abmelden</a></li>
+            </ul>
+        </nav>
+    </header>
 
-  <!-- Turnier-Erstellung -->
-  <section id="turnier-erstellen">
-    <h2>Neues Turnier erstellen</h2>
-    <form action="create_tournament.php" method="post">
-      <label for="tournament_name">Turniername:</label>
-      <input type="text" id="tournament_name" name="tournament_name" required>
-      
-      <label for="date">Datum:</label>
-      <input type="date" id="date" name="date" required>
-      
-      <label for="type">Turniermodus:</label>
-      <select id="type" name="type" required>
-        <option value="ko">K.O.-System</option>
-        <option value="double_ko">Doppel-K.O.-System</option>
-        <option value="groups">Gruppenphase</option>
-      </select>
-      
-      <label for="tables">Anzahl der Tische:</label>
-      <input type="number" id="tables" name="tables" min="1" required>
+    <main>
+        <h2>Aktuelle Turniere</h2>
+        <!-- Hier können wir eine Liste der aktuellen Turniere anzeigen -->
+        <?php
+        $stmt = $pdo->prepare("SELECT * FROM tournaments WHERE status = 'active'");
+        $stmt->execute();
+        $tournaments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        ?>
 
-      <label for="duration">Geplante Dauer (in Stunden):</label>
-      <input type="number" id="duration" name="duration" min="1" required>
+        <?php if (count($tournaments) > 0): ?>
+            <ul>
+                <?php foreach ($tournaments as $tournament): ?>
+                    <li>
+                        <strong><?php echo htmlspecialchars($tournament['name']); ?></strong> (ID: <?php echo $tournament['id']; ?>) - 
+                        <a href="live_results.php">Ergebnisse anzeigen</a>
+                    </li>
+                <?php endforeach; ?>
+            </ul>
+        <?php else: ?>
+            <p>Momentan gibt es keine aktiven Turniere.</p>
+        <?php endif; ?>
+    </main>
 
-      <label for="groups">Anzahl der Gruppen:</label>
-      <input type="number" id="groups" name="groups" min="1" required>
-      
-      <button type="submit">Turnier erstellen</button>
-    </form>
-  </section>
-
-  <!-- Bestehende Turniere -->
-  <section id="turniere-verwalten">
-    <h2>Aktuelle Turniere</h2>
-    <ul>
-      <?php
-      try {
-          $stmt = $pdo->query("SELECT * FROM tournaments");
-          $tournaments = $stmt->fetchAll();
-          if (count($tournaments) > 0) {
-              foreach ($tournaments as $tournament) {
-                  echo "<li>{$tournament['name']} ({$tournament['date']}) - Modus: {$tournament['type']} - Tische: {$tournament['tables']} - Gruppen: {$tournament['groups']} - Dauer: {$tournament['duration']} Stunden</li>";
-              }
-          } else {
-              echo "<li>Es sind noch keine Turniere vorhanden.</li>";
-          }
-      } catch (PDOException $e) {
-          echo "<li>Fehler beim Laden der Turniere: " . $e->getMessage() . "</li>";
-      }
-      ?>
-
-      
-      <!-- Link zu den Live-Ergebnissen -->
-<h2>Turnierverwaltung</h2>
-<ul>
-    <li><a href="live_results.php">Live Ergebnisse anzeigen</a></li>
-</ul>
-
-    </ul>
-  </section>
+    <footer>
+        <p>&copy; <?php echo date("Y"); ?> Tischtennis Verein</p>
+    </footer>
 </body>
 </html>
