@@ -4,6 +4,7 @@ body {
     font-family: Arial, sans-serif;
   }
   
+  /* Navigation */
   nav {
     background-color: #2C3E50;
     display: flex;
@@ -50,5 +51,59 @@ body {
     color: white;
     font-size: 36px;
     text-shadow: 2px 2px 4px #000;
+  }
+  
+  /* Turnier- und Archiv-Bereiche */
+  .tournaments, .archive {
+    padding: 2rem;
+    background-color: #ecf0f1;
+    margin: 1rem 0;
+  }
+  
+  .tournaments h2, .archive h2 {
+    color: #2C3E50;
+  }
+  
+  .tournaments ul, .archive ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .tournaments ul li, .archive ul li {
+    padding: 10px;
+    background-color: #fff;
+    margin: 5px 0;
+    border: 1px solid #ccc;
+  }
+  
+  /* Login Bereich */
+  .login {
+    padding: 2rem;
+    background-color: #f9f9f9;
+  }
+  
+  .login form {
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  
+  .login label {
+    margin-bottom: 5px;
+  }
+  
+  .login input {
+    margin-bottom: 15px;
+    padding: 10px;
+    font-size: 16px;
+  }
+  
+  .login button {
+    padding: 10px;
+    background-color: #2C3E50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
   }
   
