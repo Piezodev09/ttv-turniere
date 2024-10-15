@@ -72,5 +72,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['generate_ko'])) {
     <button type="submit" name="generate_ko">K.O.-Turnier generieren</button>
 </form>
 
+<?php
+// Hier kannst du die Gruppenphase generieren
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['generate_group'])) {
+    $_SESSION['tournament_id'] = $tournament_id; // Speichere die Turnier-ID in der Session
+    header('Location: generate_group_tournament.php');
+    exit;
+}
+?>
+
+<!-- Gruppenphase-Generierung -->
+<form action="create_tournament.php" method="post">
+    <input type="hidden" name="tournament_id" value="<?php echo $tournament_id; ?>">
+    <label for="num_groups">Anzahl der Gruppen:</label>
+    <input type="number" id="num_groups" name="num_groups" min="2" required>
+    <button type="submit" name="generate_group">Gruppenphase generieren</button>
+</form>
+
+<?php
+// Hier kannst du das Doppel-K.O.-Turnier generieren
+if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['generate_double_ko'])) {
+    $_SESSION['tournament_id'] = $tournament_id; // Speichere die Turnier-ID in der Session
+    header('Location: generate_double_ko_tournament.php');
+    exit;
+}
+?>
+
+<!-- Doppel-K.O.-Turnier-Generierung -->
+<form action="create_tournament.php" method="post">
+    <input type="hidden" name="tournament_id" value="<?php echo $tournament_id; ?>">
+    <button type="submit" name="generate_double_ko">Doppel-K.O.-Turnier generieren</button>
+</form>
+
 </body>
 </html>

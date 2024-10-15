@@ -24,4 +24,13 @@ CREATE TABLE IF NOT EXISTS matches (
     FOREIGN KEY (player1) REFERENCES players(id),
     FOREIGN KEY (player2) REFERENCES players(id),
     FOREIGN KEY (winner) REFERENCES players(id)
+    ALTER TABLE matches ADD COLUMN loser INT;
+
+);
+
+CREATE TABLE IF NOT EXISTS groups (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    tournament_id INT NOT NULL,
+    group_number INT NOT NULL,
+    FOREIGN KEY (tournament_id) REFERENCES tournaments(id)
 );

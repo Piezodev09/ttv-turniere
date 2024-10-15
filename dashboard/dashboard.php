@@ -63,6 +63,14 @@ require '../scripts/db_connection.php';
           echo "<li>Fehler beim Laden der Turniere: " . $e->getMessage() . "</li>";
       }
       ?>
+
+      
+      <!-- Link zu den Live-Ergebnissen -->
+<h2>Turnierverwaltung</h2>
+<ul>
+    <li><a href="live_results.php">Live Ergebnisse anzeigen</a></li>
+</ul>
+
     </ul>
   </section>
 </body>
