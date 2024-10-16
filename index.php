@@ -32,7 +32,7 @@
     </main>
 
     <footer>
-        <p>&copy; <?php echo date("Y"); ?> TTV RES Grund. Alle Rechte vorbehalten.</p>
+        <p>&copy; <?php echo date("Y"); ?> TTV REEs Groin. Alle Rechte vorbehalten.</p>
     </footer>
 </body>
 </html>
